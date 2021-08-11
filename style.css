@@ -9,12 +9,15 @@
 }
 
 .code-snippet .header{
+    font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+    font-size: 12px;
     background-color: rgb(246,248,250);
     border: 1px solid #d0d7de;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    padding: 20px;
+    padding: 15px;
 }
+
 .code-snippet table{
     background-color: white;
     border: 1px solid #d0d7de;
