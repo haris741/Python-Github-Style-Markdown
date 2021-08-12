@@ -10,16 +10,14 @@
 </head>
 <body>
 
-    <div class="code-snippet">import pandas as pd
-        import numpy as numpy
-    </div>
+    <pre class="code-snippet">import pandas as pd
+import numpy as numpy</pre>
 
-    <div class="code-snippet">print("This is second snippet!")
-    </div>
-
-    <div class="code-snippet">print("Line 1")
-        print("Line 2")
-        print("Line 3")</div>
+    <pre class="code-snippet">x = int(input())
+if x % 2 == 0 and x > 2:
+    print("Even Greater than 2!")
+else:
+    print("Hmmmmm...")</pre>
 
     <script src="main.js"></script>
 </body>

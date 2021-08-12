@@ -1,34 +1,34 @@
-codeSnippets = document.getElementsByClassName('code-snippet');
-for (i = 0; i < codeSnippets.length; i++)
+let codeSnippets = document.getElementsByClassName('code-snippet');
+for (let i = 0; i < codeSnippets.length; i++)
     processRawCode(codeSnippets[i]); 
 
 function processRawCode(codeSnippet){
 
-    rawCode = codeSnippet.innerHTML;
+    let rawCode = codeSnippet.textContent;
     rawCode = rawCode.split("\n");
-    numberOfLines = rawCode.length;
+    let numberOfLines = rawCode.length;
     
     codeSnippet.innerHTML = "";
 
-    snippetHeader = document.createElement('div');
+    let snippetHeader = document.createElement('div');
     snippetHeader.className = 'header';
     codeSnippet.appendChild(snippetHeader);
 
-    snippetBody = document.createElement('table');
+    let snippetBody = document.createElement('table');
     codeSnippet.appendChild(snippetBody);
 
-    snippetSize = 0;
-    for(j = 0; j < rawCode.length; j++) {
-        row = snippetBody.appendChild(document.createElement('tr'));
-        lineNumber = row.appendChild(document.createElement('td'));
+    let snippetSize = 0;
+    for(let i = 0; i < rawCode.length; i++) {
+        let row = snippetBody.appendChild(document.createElement('tr'));
+        let lineNumber = row.appendChild(document.createElement('td'));
         lineNumber.className = 'line-num';
-        lineNumber.innerHTML = j + 1;
+        lineNumber.innerHTML = i + 1;
 
-        lineCode = row.appendChild(document.createElement('td'));
+        let lineCode = row.appendChild(document.createElement('td'));
         lineCode.className = 'line-code';
-        lineCode.innerHTML = rawCode[j];
+        lineCode.innerHTML = rawCode[i];
 
-        snippetSize += rawCode[j].length;
+        snippetSize += rawCode[i].length;
     }
     
     snippetHeader.innerHTML = numberOfLines + " lines " + " | " + getSizeUnit(snippetSize);
@@ -36,8 +36,8 @@ function processRawCode(codeSnippet){
 
 function getSizeUnit(snippetSize){
 
-    units = ['Bytes', 'KB', 'MB'];
-    steps = 0;
+    let units = ['Bytes', 'KB', 'MB'];
+    let steps = 0;
     while(snippetSize >= 1024){
         snippetSize /= 1024;
         snippetSize = Math.round(snippetSize * 100)/100
