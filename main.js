@@ -26,7 +26,7 @@ function processRawCode(codeSnippet){
 
         let lineCode = row.appendChild(document.createElement('td'));
         lineCode.className = 'line-code';
-        lineCode.innerHTML = rawCode[i];
+        lineCode.innerHTML = styleKeywords(rawCode[i]);
 
         snippetSize += rawCode[i].length;
     }
@@ -34,8 +34,54 @@ function processRawCode(codeSnippet){
     snippetHeader.innerHTML = numberOfLines + " lines " + " | " + getSizeUnit(snippetSize);
 }
 
-function getSizeUnit(snippetSize){
+function isKeyword(line, stIndex, endIndex) {
 
+    if (stIndex == 0) {
+        if (endIndex + 1 == line.length) return true;
+        else {
+            if (line[endIndex + 1] == ' ' || line[endIndex + 1] == ':') return true;
+            else return false;
+        }
+    } 
+    else {
+        if (line[stIndex - 1] != ' ') return false;
+        else {
+            if (endIndex + 1 == line.length) return true;
+            else 
+            {
+                if (line[endIndex + 1] == ' ' || line[endIndex + 1] == ':') return true;
+                else return false;
+            }
+        }
+
+    }
+}
+
+
+function styleKeywords(line){
+
+    let redKeywords = ['as', 'assert', 'async', 'await','break', 'class', 'continue', 'def', 'elif', 'except', 'for', 'global', 'if', 'import', 'lambda', 'nonlocal', 'return', 'with', 'yield'];
+    let blueKeywords = ['False', 'in', 'is', 'not', 'None', 'True']
+
+    for(let i = 0; i < redKeywords.length; i++) {
+        let stIndex = line.search(redKeywords[i]);
+        let endIndex = stIndex + redKeywords[i].length - 1;
+        if (stIndex != -1  && isKeyword(line, stIndex, endIndex)) {
+            line = line.substring(0, stIndex) + "<span style='color: #CF222E;'>" + line.substring(stIndex, stIndex + redKeywords[i].length) + "</span>" + line.substring(stIndex + redKeywords[i].length, line.length);   
+        }
+    }
+
+    for(let i = 0; i < blueKeywords.length; i++) {
+        let stIndex = line.search(blueKeywords[i]);
+        let endIndex = stIndex + blueKeywords[i].length - 1;
+        if (stIndex != -1 && isKeyword(line, stIndex, endIndex)) {
+            line = line.substring(0, stIndex) + "<span style='color: #0550AE;'>" + line.substring(stIndex, stIndex + blueKeywords[i].length) + "</span>" + line.substring(stIndex + blueKeywords[i].length, line.length);   
+        }
+    }
+    return line;
+}
+
+function getSizeUnit(snippetSize){
     let units = ['Bytes', 'KB', 'MB'];
     let steps = 0;
     while(snippetSize >= 1024){
@@ -43,6 +89,5 @@ function getSizeUnit(snippetSize){
         snippetSize = Math.round(snippetSize * 100)/100
         steps++;
     }
-    
     return snippetSize + " " + units[steps];
 }
