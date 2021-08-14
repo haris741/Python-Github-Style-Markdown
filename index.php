@@ -21,15 +21,16 @@
     <pre class="code-snippet">import pandas as pd
 import numpy as numpy</pre>
 
-    <pre class="code-snippet">def funny():
+    <pre class="code-snippet"># This is a comment
+def funny():
     x = int(input())
     if x % 2 == 0 and x > 2:
         print("Even Greater than 2!")
     elif:
         print("Hmmmmm...")
     for i in range(10):
-        break
-        continue
+        break # break loop
+        # continue
     return False == True and None</pre>
     <script src="main.js"></script>
 </body>

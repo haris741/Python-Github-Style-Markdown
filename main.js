@@ -57,9 +57,7 @@ function isKeyword(line, stIndex, endIndex) {
     }
 }
 
-
 function styleKeywords(line){
-
     let redKeywords = ['as', 'assert', 'async', 'await','break', 'class', 'continue', 'def', 'elif', 'except', 'for', 'global', 'if', 'import', 'lambda', 'nonlocal', 'return', 'with', 'yield'];
     let blueKeywords = ['False', 'in', 'is', 'not', 'None', 'True']
 
@@ -67,7 +65,7 @@ function styleKeywords(line){
         let stIndex = line.search(redKeywords[i]);
         let endIndex = stIndex + redKeywords[i].length - 1;
         if (stIndex != -1  && isKeyword(line, stIndex, endIndex)) {
-            line = line.substring(0, stIndex) + "<span style='color: #CF222E;'>" + line.substring(stIndex, stIndex + redKeywords[i].length) + "</span>" + line.substring(stIndex + redKeywords[i].length, line.length);   
+            line = line.substring(0, stIndex) + "<span style='color: rgb(207, 34, 46);'>" + line.substring(stIndex, stIndex + redKeywords[i].length) + "</span>" + line.substring(stIndex + redKeywords[i].length, line.length);   
         }
     }
 
@@ -75,9 +73,18 @@ function styleKeywords(line){
         let stIndex = line.search(blueKeywords[i]);
         let endIndex = stIndex + blueKeywords[i].length - 1;
         if (stIndex != -1 && isKeyword(line, stIndex, endIndex)) {
-            line = line.substring(0, stIndex) + "<span style='color: #0550AE;'>" + line.substring(stIndex, stIndex + blueKeywords[i].length) + "</span>" + line.substring(stIndex + blueKeywords[i].length, line.length);   
+            line = line.substring(0, stIndex) + "<span style='color: rgb(5, 80, 174);'>" + line.substring(stIndex, stIndex + blueKeywords[i].length) + "</span>" + line.substring(stIndex + blueKeywords[i].length, line.length);   
         }
     }
+
+    // Styling Comment
+    let found = line.search("#");
+    if (found != -1) {
+        comment = line.substring(found, line.length);
+        comment = comment.replace(/<\/?[^>]+(>|$)/g, "");
+        line = line.substring(0, found) + "<span style='color: rgb(110, 119, 129);'>" + comment + "</span>";  
+    }
+
     return line;
 }
 
