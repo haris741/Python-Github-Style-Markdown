@@ -13,9 +13,13 @@ function processRawCode(codeSnippet){
     let snippetHeader = document.createElement('div');
     snippetHeader.className = 'header';
     codeSnippet.appendChild(snippetHeader);
-
+    
+    let snippetBodyDiv = document.createElement('div');
+    snippetBodyDiv.className = 'body';
+    codeSnippet.appendChild(snippetBodyDiv);
+    
     let snippetBody = document.createElement('table');
-    codeSnippet.appendChild(snippetBody);
+    snippetBodyDiv.appendChild(snippetBody);
 
     let snippetSize = 0;
     for(let i = 0; i < rawCode.length; i++) {
